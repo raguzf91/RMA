@@ -28,7 +28,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.layout.ContentScale
-// import androidx.compose.ui.R // Remove this line if present
 import com.example.quizos.R
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -37,11 +36,12 @@ import androidx.compose.material.icons.outlined.BookmarkBorder
 @Composable
 fun CircularCountdownTimer(
     totalTimeSeconds: Int,
+    currentTimeSeconds: Int,
     modifier: Modifier = Modifier,
     onFinished: () -> Unit = {}
 ) {
     // remember the seconds left
-    var timeLeft by remember { mutableStateOf(totalTimeSeconds) }
+    var timeLeft  = currentTimeSeconds
 
     // animiraj krug svake sekunde
     val progressFraction by animateFloatAsState(
