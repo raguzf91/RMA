@@ -26,6 +26,7 @@ import com.example.quizos.R
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.outlined.BookmarkBorder
+import CircularCountdownTimer
 
 
 
@@ -38,8 +39,8 @@ fun QuizScreen() {
             .background(
                 brush = Brush.verticalGradient(
                     colors = listOf(
-                        Color(0xFFF94E98),
-                        Color(0xFFF94E98).copy(alpha = 0.3f)
+                        Color(0xFF513d80),
+                        Color(0xFF513d80).copy(alpha = 0.3f)
                     )
                 )
             )
@@ -56,12 +57,7 @@ fun QuizScreen() {
                 contentDescription = "Back",
                 modifier = Modifier.size(24.dp)
             )
-            Text(text = "Question 3/10", fontWeight = FontWeight.Medium)
-                Icon(
-                    imageVector = Icons.Outlined.BookmarkBorder,
-                    contentDescription = "Bookmark",
-                    modifier = Modifier.size(24.dp)
-                )
+           
             
         }
         Spacer(modifier = Modifier.height(16.dp))
@@ -86,10 +82,9 @@ fun QuizScreen() {
     
         shape = RoundedCornerShape(0.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color(0xFF4CC9F0)
+            containerColor = Color.Transparent
         ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
-    
+        
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
         // top half: image + gradient
@@ -116,6 +111,18 @@ fun QuizScreen() {
                             )
                         )
                     )
+            )
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, top = 8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Question 3 of 10",
+                fontWeight = FontWeight.Medium,
+                color = Color.LightGray
             )
         }
         // bottom half: question text
@@ -192,7 +199,8 @@ Column(
 
         Spacer(modifier = Modifier.height(16.dp))
         Row(
-           verticalAlignment = Alignment.CenterVertically,
+           verticalAlignment = Alignment.Top,
+           
            modifier = Modifier
                .fillMaxWidth()
                .padding(vertical = 16.dp)
@@ -222,36 +230,16 @@ Column(
            
        }
 
-       Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 16.dp),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically // ensures bar and text line up
-    ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth(0.8f)
-                .height(6.dp)
-                .clip(RoundedCornerShape(3.dp))
-                .background(Color.White),
-            contentAlignment = Alignment.CenterStart
-        ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .fillMaxWidth(0.6f)
-                    .background(Color(0xFFFF8A65))
-            )
-        }
-        Spacer(Modifier.width(8.dp))  // gap between bar and timer
-        Text(
-            text = "00:12",
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.White
-        )
-    }
+       Box(
+  modifier = Modifier
+    .fillMaxWidth(),
+  contentAlignment = Alignment.Center
+) {
+  CircularCountdownTimer(
+    totalTimeSeconds = 60,
+    modifier = Modifier.size(60.dp)
+  )
+}
 
 
        
@@ -262,30 +250,32 @@ Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            CheatsButton(label = "50/50")
-            CheatsButton(label = "Audience")
-            CheatsButton(label = "Add time")
-            CheatsButton(label = "Skip")
+            CheatsButton(label = "50/50", backgroundColor = Color(0xFF81C784))  // green
+            CheatsButton(label = "Audience", backgroundColor = Color(0xFFF06292))// pink
+            CheatsButton(label = "Add time", backgroundColor = Color(0xFF64B5F6))// blue
+            CheatsButton(label = "Skip", backgroundColor = Color(0xFFE57373))    // red
         }
     }
 
 }
 
 @Composable
-fun RowScope.CheatsButton(label: String) {
+fun RowScope.CheatsButton(label: String, backgroundColor: Color ) {
     Card(
         shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
+        colors = CardDefaults.cardColors(containerColor = backgroundColor),
         elevation = CardDefaults.cardElevation(4.dp),
         modifier = Modifier
             .weight(1f)
             .height(48.dp)
             .padding(horizontal = 4.dp)
             .clickable { }
+            
            
     ) {
         Box(
             modifier = Modifier.fillMaxSize(), // fill full card
+            
             contentAlignment = Alignment.Center) {
             Text(text = label, fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
         }
