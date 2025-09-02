@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "686385980360",
+    "project_id": "quizos-fb3ee",
+    "storage_bucket": "quizos-fb3ee.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:686385980360:android:0aff8ffc66a144e700d6fd",
+        "android_client_info": {
+          "package_name": "com.example.quizos"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEjZ19Kikgvh0mznPNZnyIavlYIC9i94o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -50,7 +50,6 @@ fun CircularCountdownTimer(
     )
 
 
-    // this effect will run every second until timeLeft is 0
     LaunchedEffect(timeLeft) {
       if (timeLeft > 0) {
         delay(1_000L)

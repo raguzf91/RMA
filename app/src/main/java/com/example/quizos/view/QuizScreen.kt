@@ -5,132 +5,49 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.ui.draw.clip
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.intl.Locale
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.quizos.MyApplication
 import com.example.quizos.R
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import CircularCountdownTimer
-import Option
-import QuestionCard
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import androidx.compose.runtime.rememberCoroutineScope
-
-val questionCards = listOf(
-    QuestionCard(
-        topic = "Mathematics",
-        question = "What is the derivative of sin(x)?",
-        options = listOf(
-            Option(index = 0, value = "cos(x)", correctAnswer = true),
-            Option(index = 1, value = "-sin(x)", correctAnswer = false),
-            Option(index = 2, value = "-cos(x)", correctAnswer = false),
-            Option(index = 3, value = "sin(x)", correctAnswer = false)
-        )
-    ),
-    QuestionCard(
-        topic = "History",
-        question = "Who was the first emperor of the Roman Empire?",
-        options = listOf(
-            Option(index = 0, value = "Julius Caesar", correctAnswer = false),
-            Option(index = 1, value = "Augustus", correctAnswer = true),
-            Option(index = 2, value = "Nero", correctAnswer = false),
-            Option(index = 3, value = "Tiberius", correctAnswer = false)
-        )
-    ),
-    QuestionCard(
-        topic = "Geography",
-        question = "Which country has the longest coastline in the world?",
-        options = listOf(
-            Option(index = 0, value = "Australia", correctAnswer = false),
-            Option(index = 1, value = "Russia", correctAnswer = false),
-            Option(index = 2, value = "Canada", correctAnswer = true),
-            Option(index = 3, value = "United States", correctAnswer = false)
-        )
-    ),
-    QuestionCard(
-        topic = "Literature",
-        question = "Who wrote ‘Pride and Prejudice’?",
-        options = listOf(
-            Option(index = 0, value = "Emily Brontë", correctAnswer = false),
-            Option(index = 1, value = "Jane Austen", correctAnswer = true),
-            Option(index = 2, value = "Charles Dickens", correctAnswer = false),
-            Option(index = 3, value = "Mary Shelley", correctAnswer = false)
-        )
-    ),
-    QuestionCard(
-        topic = "Science",
-        question = "What is the chemical symbol for gold?",
-        options = listOf(
-            Option(index = 0, value = "Ag", correctAnswer = false),
-            Option(index = 1, value = "Au", correctAnswer = true),
-            Option(index = 2, value = "Gd", correctAnswer = false),
-            Option(index = 3, value = "Pb", correctAnswer = false)
-        )
-    )
-)
-
+import com.example.quizos.model.Option
+import com.example.quizos.ui.theme.PressStart2P
+import com.example.quizos.ui.theme.QuizOsTheme
+import com.example.quizos.viewmodel.QuizUiState
+import com.example.quizos.viewmodel.QuizViewModel
+import com.example.quizos.viewmodel.QuizViewModelFactory
 @Composable
-fun QuizScreen() {
-    var currentIndex by remember { mutableStateOf(0) }
-    var selectedOption by remember { mutableStateOf<Option?>(null) }
-    val currentCard = questionCards[currentIndex]
-    val coroutineScope = rememberCoroutineScope()
-    val totalTimePerQuestion = 20
-    var timeRemaining by remember { mutableStateOf(totalTimePerQuestion) }
-    var score by remember { mutableStateOf(0) }
-    var lives by remember { mutableStateOf(3) }
-    var coins by remember { mutableStateOf(50) }
-    var fiftyFiftyOptions by remember { mutableStateOf<List<Int>?>(null) }
-    val context = LocalContext.current
-    val resName = currentCard.topic.lowercase(java.util.Locale.ROOT)       
-    val imageRes = context.resources.getIdentifier(resName, "drawable", context.packageName)
-        .takeIf { it != 0 } ?: R.drawable.placeholder   
-    LaunchedEffect(currentIndex) {
-        timeRemaining = totalTimePerQuestion
-        fiftyFiftyOptions = null
-        while (timeRemaining > 0) {
-          delay(1_000L)
-          timeRemaining--
-        }
-      }
-
-
-    LaunchedEffect(timeRemaining) {
-        if (timeRemaining == 0 && selectedOption == null) {
-          // deduct score & lives
-          if (score > 0) score = (score - 10).coerceAtLeast(0)
-          lives--
+fun QuizScreen(
+    categoryName: String,
+    onGoToProfile: () -> Unit
+) {
+    val application = LocalContext.current.applicationContext as MyApplication
+    val viewModel: QuizViewModel = viewModel(
+        factory = QuizViewModelFactory(application.container.quizRepository, categoryName, application.container.authRepository, application.container.notificationViewModel
+)
+    )
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     
-          //handle game‐over
-          if (lives <= 0) {
-            // TODO: dovrsi
-          }
-    
-         
-          coroutineScope.launch {
-            delay(3_000L)
-            currentIndex = (currentIndex + 1).coerceAtMost(questionCards.lastIndex)
-            selectedOption = null
-          }
-        }
-      }
-    
-   
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -142,238 +59,253 @@ fun QuizScreen() {
                     )
                 )
             )
-            .padding(16.dp)
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-        ) {
-           
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Start,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(
-                    imageVector = Icons.Default.ArrowBack,
-                    contentDescription = "Back",
-                    modifier = Modifier.size(24.dp)
+        when {
+            uiState.isLoading -> {
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            }
+            uiState.error != null -> {
+                Text(
+                    text = "Error: ${uiState.error}",
+                    color = Color.Red,
+                    modifier = Modifier.align(Alignment.Center)
                 )
             }
+            uiState.isQuizOver -> {
+                Column(
+                    modifier = Modifier.align(Alignment.Center),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "Game Over",
+                        color = Color.White,
+                        textAlign = TextAlign.Center,
+                        fontSize = 48.sp,
+                        fontFamily = PressStart2P,
+                        style = TextStyle(
+                            shadow = Shadow(
+                                color = Color.Black.copy(alpha = 0.75f),
+                                offset = Offset(8f, 8f),
+                                blurRadius = 0f
+                            )
+                        )
+                    )
+                    Spacer(modifier = Modifier.height(32.dp))
+                    Text(
+                        text = "Final Score: ${uiState.score}",
+                        color = Color.White,
+                        fontSize = 24.sp,
+                        fontFamily = PressStart2P
+                    )
+                    Spacer(modifier = Modifier.height(48.dp))
 
-            Spacer(modifier = Modifier.height(16.dp))
+                    Button(
+                        onClick = onGoToProfile,
+                        shape = RoundedCornerShape(12.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFFA726))
+                    ) {
+                        Text(
+                            text = "Return to Home",
+                            fontFamily = PressStart2P,
+                            fontSize = 16.sp,
+                            color = Color.White,
+                            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+                        )
+                    }
+                }
+            }
+            uiState.currentQuestion != null -> {
+                QuizContent(
+                    uiState = uiState,
+                    onOptionClick = { viewModel.onOptionSelected(it) },
+                    onFiftyFiftyClick = { viewModel.useFiftyFiftyCheat() },
+                    onAudienceClick = { viewModel.useAudienceCheat() },
+                    onAddTimeClick = { viewModel.useAddTimeCheat() },
+                    onSkipClick = { viewModel.useSkipCheat() }
+                )
+            }
+        }
+    }
+}
 
-           
+@Composable
+fun QuizContent(
+    uiState: QuizUiState,
+    onOptionClick: (Option) -> Unit,
+    onFiftyFiftyClick: () -> Unit,
+    onAudienceClick: () -> Unit,
+    onAddTimeClick: () -> Unit,
+    onSkipClick: () -> Unit
+) {
+    val currentQuestion = uiState.currentQuestion!!
+    val context = LocalContext.current
+    val resName = currentQuestion.topic.lowercase(java.util.Locale.ROOT)
+    val imageRes = context.resources.getIdentifier(resName, "drawable", context.packageName)
+        .takeIf { it != 0 } ?: R.drawable.placeholder
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+            .padding(top = 24.dp)
+    ) {
+        Box(
+            modifier = Modifier.fillMaxWidth()
+        ) {
             Text(
-                text = currentCard.topic,
-                modifier = Modifier.fillMaxWidth(),
-                textAlign = TextAlign.Center,
+                text = currentQuestion.topic,
+                modifier = Modifier.align(Alignment.Center),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.White
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
-
-           
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(310.dp),
-                shape = RoundedCornerShape(8.dp),
-                colors = CardDefaults.cardColors(containerColor = Color.Transparent)
-            ) {
-                Column(
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .height(200.dp)
-                            .fillMaxWidth()
-                            .clip(RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp))
-                    ) {
-                        Image(
-                            painter = painterResource(id = imageRes),
-                            contentDescription = currentCard.topic,
-                            modifier = Modifier.matchParentSize(),
-                            contentScale = ContentScale.Crop
-                        )
-                        Box(
-                            modifier = Modifier
-                                .matchParentSize()
-                                .background(
-                                    Brush.verticalGradient(
-                                        colors = listOf(
-                                            Color.Black.copy(alpha = 0.4f),
-                                            Color.Transparent
-                                        )
-                                    )
-                                )
-                        )
-                    }
-                    Box(
-                        modifier = Modifier
-                            .weight(0.4f)
-                            .fillMaxWidth()
-                            .padding(16.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = currentCard.question,
-                            fontSize = 26.sp,
-                            fontWeight = FontWeight.Medium,
-                            color = Color.White,
-                            textAlign = TextAlign.Center
-                        )
-                    }
-                }
-            }
-
-            Spacer(modifier = Modifier.height(32.dp))
-
-           
-            Column(
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                currentCard.options.forEach { option ->
-                    val showCorrectOnTimeout = selectedOption == null && timeRemaining == 0
-                    val show50 = fiftyFiftyOptions != null
-                    val isVisible = !show50 || option.index in fiftyFiftyOptions!!
-                    val bgColor = when {
-                        // 1) user has tapped an option → show result
-                        selectedOption != null && option == selectedOption && option.correctAnswer  -> Color(0xFFA5D6A7)  // green
-                        selectedOption != null && option == selectedOption && !option.correctAnswer -> Color(0xFFEF9A9A)  // red
-                        // if they picked wrong, still show the correct one
-                        selectedOption != null && option.correctAnswer                           -> Color(0xFFA5D6A7)
-
-                        // 2) timeout case
-                        showCorrectOnTimeout && option.correctAnswer                             -> Color(0xFFA5D6A7)
-
-                        // 3) 50/50 cheat (only when nothing’s picked yet)
-                        show50 && option.index in fiftyFiftyOptions!!                           -> Color(0xFFFFA726)  // orange
-                        show50 && !isVisible                                                     -> Color.LightGray.copy(alpha = 0.5f)
-
-                        // 4) default un‐answered state
-                        selectedOption == null                                                  -> Color.White
-
-                        else                                                                     -> Color.White
-                    }
-
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clip(RoundedCornerShape(8.dp))
-                            .background(bgColor)
-                            .clickable(enabled = selectedOption == null && timeRemaining > 0 && isVisible) {
-                                selectedOption = option
-                                if(option.correctAnswer) {
-                                    score = score + timeRemaining
-                                } else {
-                                    if ((score - 10) > 0) {
-                                        score = score - 10
-                                    } else {
-                                        score = 0
-                                    }
-                                    
-                                    lives = lives - 1
-                                    if (lives <= 0) {
-                                        //TODO dovrsi
-                                    }
-
-                                } 
-                                coroutineScope.launch {
-                                    delay(3000)
-                                    currentIndex = (currentIndex + 1).coerceAtMost(questionCards.lastIndex)
-                                    selectedOption = null
-                                }
-                            }
-                            .padding(16.dp),
-                        contentAlignment = Alignment.CenterStart
-                    ) {
-                        Text(
-                            text = option.value,
-                            fontSize = 18.sp,
-                            color = if (bgColor == Color.White) Color.Black else Color.White
-                        )
-                    }
-                }
-            }
-
-            Spacer(modifier = Modifier.height(64.dp))
-
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .align(Alignment.CenterEnd)
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(Color(0xFF6E4BA5))
+                    .padding(horizontal = 12.dp, vertical = 6.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                Image(
+                    painter = painterResource(id = R.drawable.coin_purse),
+                    contentDescription = "Coins",
+                    modifier = Modifier.size(24.dp)
+                )
+                Spacer(modifier = Modifier.width(4.dp))
                 Text(
-                    text = "$lives ❤️",
-                    fontSize = 20.sp,
+                    text = "${uiState.coins}",
+                    fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.White
                 )
-                CircularCountdownTimer(
-                    totalTimeSeconds = totalTimePerQuestion,
-                    currentTimeSeconds = timeRemaining,
-                    modifier = Modifier.size(60.dp)
-                )
-                Text(
-                    text = "$score 👑",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White
-                )
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                CheatsButton(
-                    label = "50/50",
-                    backgroundColor = Color(0xFFFFA726),
-                    onClick = {
-                      if (coins >= 25 && fiftyFiftyOptions == null) {
-                        coins -= 25
-                        val correctIdx = currentCard.options.first { it.correctAnswer }.index
-                        val wrongs = currentCard.options.filter { !it.correctAnswer }.map { it.index }
-                        fiftyFiftyOptions = listOf(correctIdx, wrongs.random())
-                      }
-                    },
-                    modifier = Modifier.weight(1f).height(56.dp)
-                  )
-                CheatsButton(label = "Audience", backgroundColor = Color(0xFFF06292), modifier = Modifier.weight(1f).height(56.dp), onClick = { /* … */ })
-                CheatsButton(label = "Add time", backgroundColor = Color(0xFF64B5F6), modifier = Modifier.weight(1f).height(56.dp), onClick = { /* … */ })
-                CheatsButton(label = "Skip", backgroundColor = Color(0xFFE57373), modifier = Modifier.weight(1f).height(56.dp), onClick = { /* … */ })
             }
         }
 
-        
-        Row(
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Card(
             modifier = Modifier
-                .align(Alignment.TopEnd)
-                .padding(8.dp)
-                .clip(RoundedCornerShape(16.dp))
-                .background(Color(0xFF6E4BA5))
-                .padding(horizontal = 12.dp, vertical = 6.dp),
+                .fillMaxWidth()
+                .height(250.dp),
+            shape = RoundedCornerShape(16.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.Transparent)
+        ) {
+            Box {
+                Image(
+                    painter = painterResource(id = imageRes),
+                    contentDescription = currentQuestion.topic,
+                    modifier = Modifier.fillMaxWidth(),
+                    contentScale = ContentScale.Crop
+                )
+            }
+        }
+               Text(
+                    text = currentQuestion.question,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = Color.White,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(12.dp)
+                )
+
+        Spacer(modifier = Modifier.weight(1f)) // Pushes options down
+
+        // --- Answer Options ---
+        currentQuestion.options.forEach { option ->
+
+           if (option.value !in uiState.hiddenOptions) {
+                val selectedOption = uiState.selectedOption
+                val isSelected = option.value == selectedOption?.value
+                val showResult = selectedOption != null
+
+                val bgColor = when {
+                    isSelected && option.correctAnswer -> Color(0xFFA5D6A7)
+                    isSelected && !option.correctAnswer -> Color(0xFFEF9A9A)
+                    showResult && option.correctAnswer -> Color(0xFFA5D6A7)
+                    else -> Color.White
+                }
+
+                val textColor = if (bgColor != Color.White) Color.Black else Color.DarkGray
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 6.dp)
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(bgColor)
+                        .clickable(enabled = !showResult && uiState.timeRemaining > 0) {
+                            onOptionClick(option)
+                        }
+                        .padding(12.dp),
+                    contentAlignment = Alignment.CenterStart
+                ) {
+                    Text(
+                        text = option.value,
+                        fontSize = 16.sp,
+                        color = textColor
+                    )
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.weight(1f))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.coin_purse),
-                contentDescription = "Coins",
-                modifier = Modifier.size(24.dp)
-            )
-            Spacer(modifier = Modifier.width(4.dp))
             Text(
-                text = "$coins",
-                fontSize = 16.sp,
+                text = "${uiState.lives} ❤️",
+                fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.White
             )
+           Box(modifier = Modifier.size(60.dp), contentAlignment = Alignment.Center) {
+                CircularProgressIndicator(
+                    progress = { uiState.timeRemaining / 20f },
+                    modifier = Modifier.fillMaxSize(),
+                    color = Color(Color.Red.value),
+                    strokeWidth = 4.dp,
+                    trackColor = Color.White.copy(alpha = 0.3f)
+                )
+                Text(
+                    text = "${uiState.timeRemaining}",
+                    color = Color.White,
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+
+            Text(
+                text = "${uiState.score} 👑",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            CheatsButton(label = "50/50", backgroundColor = Color(0xFFFFA726), onClick = onFiftyFiftyClick, modifier = Modifier
+                .weight(1f)
+                .height(50.dp))
+            CheatsButton(label = "Audience", backgroundColor = Color(0xFFF06292), onClick = onAudienceClick, modifier = Modifier
+                .weight(1f)
+                .height(50.dp))
+            CheatsButton(label = "Add time", backgroundColor = Color(0xFF64B5F6), onClick = onAddTimeClick, modifier = Modifier
+                .weight(1f)
+                .height(50.dp))
+            CheatsButton(label = "Skip", backgroundColor = Color(0xFFE57373), onClick = onSkipClick, modifier = Modifier
+                .weight(1f)
+                .height(50.dp))
         }
     }
 }
@@ -382,7 +314,7 @@ fun QuizScreen() {
 fun RowScope.CheatsButton(
     label: String,
     backgroundColor: Color,
-    onClick: ()->Unit,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -390,14 +322,47 @@ fun RowScope.CheatsButton(
         colors = CardDefaults.cardColors(containerColor = backgroundColor),
         elevation = CardDefaults.cardElevation(6.dp),
         modifier = modifier
-            .padding(horizontal = 4.dp)
             .clickable(onClick = onClick)
     ) {
         Box(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
-            Text(text = label, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
+            Text(text = label, fontSize = 14.sp, fontWeight = FontWeight.SemiBold, color = Color.White)
         }
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFF513d80)
+@Composable
+fun QuizContentPreview() {
+    val sampleQuestion = com.example.quizos.model.QuestionCard(
+        topic = "Science",
+        question = "What is the powerhouse of the cell?",
+        options = listOf(
+            Option(0, "Mitochondria", true),
+            Option(1, "Nucleus", false),
+            Option(2, "Ribosome", false),
+            Option(3, "Endoplasmic Reticulum", false)
+        )
+    )
+    val uiState = QuizUiState(
+        isLoading = false,
+        questions = listOf(sampleQuestion),
+        currentQuestionIndex = 0,
+        score = 120,
+        lives = 2,
+        coins = 35,
+        timeRemaining = 15
+    )
+    QuizOsTheme {
+        QuizContent(
+            uiState = uiState,
+            onOptionClick = {},
+            onFiftyFiftyClick = {},
+            onAudienceClick = {},
+            onAddTimeClick = {},
+            onSkipClick = {}
+        )
     }
 }

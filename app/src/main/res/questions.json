@@ -1,0 +1,784 @@
+[
+  {
+    "topic": "Mathematics",
+    "question": "What is the derivative of sin(x)?",
+    "options": [
+      {
+        "index": 0,
+        "value": "cos(x)",
+        "correctAnswer": true
+      },
+      {
+        "index": 1,
+        "value": "-sin(x)",
+        "correctAnswer": false
+      },
+      {
+        "index": 2,
+        "value": "-cos(x)",
+        "correctAnswer": false
+      },
+      {
+        "index": 3,
+        "value": "sin(x)",
+        "correctAnswer": false
+      }
+    ]
+  },
+  {
+    "topic": "History",
+    "question": "Who was the first emperor of the Roman Empire?",
+    "options": [
+      {
+        "index": 0,
+        "value": "Julius Caesar",
+        "correctAnswer": false
+      },
+      {
+        "index": 1,
+        "value": "Augustus",
+        "correctAnswer": true
+      },
+      {
+        "index": 2,
+        "value": "Nero",
+        "correctAnswer": false
+      },
+      {
+        "index": 3,
+        "value": "Tiberius",
+        "correctAnswer": false
+      }
+    ]
+  },
+  {
+    "topic": "Geography",
+    "question": "Which country has the longest coastline in the world?",
+    "options": [
+      {
+        "index": 0,
+        "value": "Australia",
+        "correctAnswer": false
+      },
+      {
+        "index": 1,
+        "value": "Russia",
+        "correctAnswer": false
+      },
+      {
+        "index": 2,
+        "value": "Canada",
+        "correctAnswer": true
+      },
+      {
+        "index": 3,
+        "value": "United States",
+        "correctAnswer": false
+      }
+    ]
+  },
+  {
+    "topic": "Literature",
+    "question": "Who wrote ‘Pride and Prejudice’?",
+    "options": [
+      {
+        "index": 0,
+        "value": "Emily Brontë",
+        "correctAnswer": false
+      },
+      {
+        "index": 1,
+        "value": "Jane Austen",
+        "correctAnswer": true
+      },
+      {
+        "index": 2,
+        "value": "Charles Dickens",
+        "correctAnswer": false
+      },
+      {
+        "index": 3,
+        "value": "Mary Shelley",
+        "correctAnswer": false
+      }
+    ]
+  },
+  {
+    "topic": "Science",
+    "question": "What is the chemical symbol for gold?",
+    "options": [
+      {
+        "index": 0,
+        "value": "Ag",
+        "correctAnswer": false
+      },
+      {
+        "index": 1,
+        "value": "Au",
+        "correctAnswer": true
+      },
+      {
+        "index": 2,
+        "value": "Gd",
+        "correctAnswer": false
+      },
+      {
+        "index": 3,
+        "value": "Pb",
+        "correctAnswer": false
+      }
+    ]
+  },
+  {
+    "topic": "History",
+    "question": "In which year did the First World War end?",
+    "options": [
+      {
+        "index": 0,
+        "value": "1916",
+        "correctAnswer": false
+      },
+      {
+        "index": 1,
+        "value": "1918",
+        "correctAnswer": true
+      },
+      {
+        "index": 2,
+        "value": "1920",
+        "correctAnswer": false
+      },
+      {
+        "index": 3,
+        "value": "1914",
+        "correctAnswer": false
+      }
+    ]
+  },
+  {
+    "topic": "History",
+    "question": "Who succeeded Neville Chamberlain as Prime Minister in 1940?",
+    "options": [
+      {
+        "index": 0,
+        "value": "Clement Attlee",
+        "correctAnswer": false
+      },
+      {
+        "index": 1,
+        "value": "Winston Churchill",
+        "correctAnswer": true
+      },
+      {
+        "index": 2,
+        "value": "Anthony Eden",
+        "correctAnswer": false
+      },
+      {
+        "index": 3,
+        "value": "Harold Macmillan",
+        "correctAnswer": false
+      }
+    ]
+  },
+  {
+    "topic": "History",
+    "question": "Where did backgammon originate?",
+    "options": [
+      {
+        "index": 0,
+        "value": "Rome",
+        "correctAnswer": false
+      },
+      {
+        "index": 1,
+        "value": "Persia",
+        "correctAnswer": true
+      },
+      {
+        "index": 2,
+        "value": "Greece",
+        "correctAnswer": false
+      },
+      {
+        "index": 3,
+        "value": "Egypt",
+        "correctAnswer": false
+      }
+    ]
+  },
+  {
+    "topic": "Geography",
+    "question": "What is the capital of Malaysia?",
+    "options": [
+      {
+        "index": 0,
+        "value": "Singapore",
+        "correctAnswer": false
+      },
+      {
+        "index": 1,
+        "value": "Kuala Lumpur",
+        "correctAnswer": true
+      },
+      {
+        "index": 2,
+        "value": "Jakarta",
+        "correctAnswer": false
+      },
+      {
+        "index": 3,
+        "value": "Bangkok",
+        "correctAnswer": false
+      }
+    ]
+  },
+  {
+    "topic": "Geography",
+    "question": "What is the name of the peninsula located in the northern part of Norway, Finland, and Russia?",
+    "options": [
+      {
+        "index": 0,
+        "value": "Scandinavian Peninsula",
+        "correctAnswer": false
+      },
+      {
+        "index": 1,
+        "value": "Kola Peninsula",
+        "correctAnswer": true
+      },
+      {
+        "index": 2,
+        "value": "Iberian Peninsula",
+        "correctAnswer": false
+      },
+      {
+        "index": 3,
+        "value": "Balkan Peninsula",
+        "correctAnswer": false
+      }
+    ]
+  },
+  {
+    "topic": "Literature",
+    "question": "Who is the author of 'Don Quixote'?",
+    "options": [
+      {
+        "index": 0,
+        "value": "Gabriel Garcia Marquez",
+        "correctAnswer": false
+      },
+      {
+        "index": 1,
+        "value": "Miguel de Cervantes",
+        "correctAnswer": true
+      },
+      {
+        "index": 2,
+        "value": "Jorge Luis Borges",
+        "correctAnswer": false
+      },
+      {
+        "index": 3,
+        "value": "Pablo Neruda",
+        "correctAnswer": false
+      }
+    ]
+  },
+  {
+    "topic": "Literature",
+    "question": "Who wrote 'The Chronicles of Narnia'?",
+    "options": [
+      {
+        "index": 0,
+        "value": "J.R.R. Tolkien",
+        "correctAnswer": false
+      },
+      {
+        "index": 1,
+        "value": "C.S. Lewis",
+        "correctAnswer": true
+      },
+      {
+        "index": 2,
+        "value": "J.K. Rowling",
+        "correctAnswer": false
+      },
+      {
+        "index": 3,
+        "value": "Roald Dahl",
+        "correctAnswer": false
+      }
+    ]
+  },
+  {
+    "topic": "Science",
+    "question": "What is the study of mushrooms called?",
+    "options": [
+      {
+        "index": 0,
+        "value": "Botany",
+        "correctAnswer": false
+      },
+      {
+        "index": 1,
+        "value": "Mycology",
+        "correctAnswer": true
+      },
+      {
+        "index": 2,
+        "value": "Zoology",
+        "correctAnswer": false
+      },
+      {
+        "index": 3,
+        "value": "Geology",
+        "correctAnswer": false
+      }
+    ]
+  },
+  {
+    "topic": "Science",
+    "question": "What is the largest bird in the world?",
+    "options": [
+      {
+        "index": 0,
+        "value": "Emu",
+        "correctAnswer": false
+      },
+      {
+        "index": 1,
+        "value": "Ostrich",
+        "correctAnswer": true
+      },
+      {
+        "index": 2,
+        "value": "Albatross",
+        "correctAnswer": false
+      },
+      {
+        "index": 3,
+        "value": "Eagle",
+        "correctAnswer": false
+      }
+    ]
+  },
+  {
+    "topic": "Pop culture",
+    "question": "Which movie, starring Brad Pitt and Edward Norton, is based on a novel by Chuck Palahniuk?",
+    "options": [
+      {
+        "index": 0,
+        "value": "Seven",
+        "correctAnswer": false
+      },
+      {
+        "index": 1,
+        "value": "Fight Club",
+        "correctAnswer": true
+      },
+      {
+        "index": 2,
+        "value": "The Curious Case of Benjamin Button",
+        "correctAnswer": false
+      },
+      {
+        "index": 3,
+        "value": "Ocean's Eleven",
+        "correctAnswer": false
+      }
+    ]
+  },
+  {
+    "topic": "Pop culture",
+    "question": "Who composed the music for 'The Messiah'?",
+    "options": [
+      {
+        "index": 0,
+        "value": "Bach",
+        "correctAnswer": false
+      },
+      {
+        "index": 1,
+        "value": "George Frideric Handel",
+        "correctAnswer": true
+      },
+      {
+        "index": 2,
+        "value": "Mozart",
+        "correctAnswer": false
+      },
+      {
+        "index": 3,
+        "value": "Beethoven",
+        "correctAnswer": false
+      }
+    ]
+  },
+  {
+    "topic": "Sports",
+    "question": "Which footballer is known as 'The Egyptian King'?",
+    "options": [
+      {
+        "index": 0,
+        "value": "Sadio Mané",
+        "correctAnswer": false
+      },
+      {
+        "index": 1,
+        "value": "Mohamed Salah",
+        "correctAnswer": true
+      },
+      {
+        "index": 2,
+        "value": "Riyad Mahrez",
+        "correctAnswer": false
+      },
+      {
+        "index": 3,
+        "value": "Hakim Ziyech",
+        "correctAnswer": false
+      }
+    ]
+  },
+  
+  {
+    "topic": "Science",
+    "question": "Which planet in our solar system is the hottest?",
+    "options": [
+      {
+        "index": 0,
+        "value": "Mercury",
+        "correctAnswer": false
+      },
+      {
+        "index": 1,
+        "value": "Venus",
+        "correctAnswer": true
+      },
+      {
+        "index": 2,
+        "value": "Mars",
+        "correctAnswer": false
+      },
+      {
+        "index": 3,
+        "value": "Jupiter",
+        "correctAnswer": false
+      }
+    ]
+  },
+  {
+    "topic": "Geography",
+    "question": "The Needles off the Isle of Wight are an example of what type of geographical feature?",
+    "options": [
+      {
+        "index": 0,
+        "value": "Spit",
+        "correctAnswer": false
+      },
+      {
+        "index": 1,
+        "value": "Stack",
+        "correctAnswer": true
+      },
+      {
+        "index": 2,
+        "value": "Arch",
+        "correctAnswer": false
+      },
+      {
+        "index": 3,
+        "value": "Tombolo",
+        "correctAnswer": false
+      }
+    ]
+  },
+  {
+    "topic": "Pop culture",
+    "question": "Which Street Fighter character wears a white outfit and a red headband?",
+    "options": [
+      {
+        "index": 0,
+        "value": "Ken",
+        "correctAnswer": false
+      },
+      {
+        "index": 1,
+        "value": "Ryu",
+        "correctAnswer": true
+      },
+      {
+        "index": 2,
+        "value": "Chun-Li",
+        "correctAnswer": false
+      },
+      {
+        "index": 3,
+        "value": "Guile",
+        "correctAnswer": false
+      }
+    ]
+  },
+  {
+    "topic": "Science",
+    "question": "Which is longer, a statute mile or a nautical mile?",
+    "options": [
+      {
+        "index": 0,
+        "value": "Statute mile",
+        "correctAnswer": false
+      },
+      {
+        "index": 1,
+        "value": "Nautical mile",
+        "correctAnswer": true
+      },
+      {
+        "index": 2,
+        "value": "They are the same length",
+        "correctAnswer": false
+      },
+      {
+        "index": 3,
+        "value": "A kilometer",
+        "correctAnswer": false
+      }
+    ]
+  },
+  {
+    "topic": "History",
+    "question": "In which year did the Battle of Thermopylae take place?",
+    "options": [
+      {
+        "index": 0,
+        "value": "490 BC",
+        "correctAnswer": false
+      },
+      {
+        "index": 1,
+        "value": "480 BC",
+        "correctAnswer": true
+      },
+      {
+        "index": 2,
+        "value": "300 BC",
+        "correctAnswer": false
+      },
+      {
+        "index": 3,
+        "value": "500 BC",
+        "correctAnswer": false
+      }
+    ]
+  },
+  {
+    "topic": "Science",
+    "question": "How many faces does a dodecahedron have?",
+    "options": [
+      {
+        "index": 0,
+        "value": "10",
+        "correctAnswer": false
+      },
+      {
+        "index": 1,
+        "value": "12",
+        "correctAnswer": true
+      },
+      {
+        "index": 2,
+        "value": "20",
+        "correctAnswer": false
+      },
+      {
+        "index": 3,
+        "value": "8",
+        "correctAnswer": false
+      }
+    ]
+  },
+  {
+    "topic": "Sports",
+    "question": "What sport is David Beckham famous for playing?",
+    "options": [
+      {
+        "index": 0,
+        "value": "Cricket",
+        "correctAnswer": false
+      },
+      {
+        "index": 1,
+        "value": "Football (Soccer)",
+        "correctAnswer": true
+      },
+      {
+        "index": 2,
+        "value": "Rugby",
+        "correctAnswer": false
+      },
+      {
+        "index": 3,
+        "value": "Tennis",
+        "correctAnswer": false
+      }
+    ]
+  },
+  {
+    "topic": "Geography",
+    "question": "Which country is known as the 'Land of the Free'?",
+    "options": [
+      {
+        "index": 0,
+        "value": "Canada",
+        "correctAnswer": false
+      },
+      {
+        "index": 1,
+        "value": "United States",
+        "correctAnswer": true
+      },
+      {
+        "index": 2,
+        "value": "France",
+        "correctAnswer": false
+      },
+      {
+        "index": 3,
+        "value": "Australia",
+        "correctAnswer": false
+      }
+    ]
+  },
+  {
+    "topic": "History",
+    "question": "In Roman mythology, who is the goddess of health?",
+    "options": [
+      {
+        "index": 0,
+        "value": "Juno",
+        "correctAnswer": false
+      },
+      {
+        "index": 1,
+        "value": "Salus",
+        "correctAnswer": true
+      },
+      {
+        "index": 2,
+        "value": "Minerva",
+        "correctAnswer": false
+      },
+      {
+        "index": 3,
+        "value": "Venus",
+        "correctAnswer": false
+      }
+    ]
+  },
+  {
+    "topic": "Literature",
+    "question": "Who is the author of the epic Roman poem 'The Aeneid'?",
+    "options": [
+      {
+        "index": 0,
+        "value": "Homer",
+        "correctAnswer": false
+      },
+      {
+        "index": 1,
+        "value": "Virgil",
+        "correctAnswer": true
+      },
+      {
+        "index": 2,
+        "value": "Ovid",
+        "correctAnswer": false
+      },
+      {
+        "index": 3,
+        "value": "Horace",
+        "correctAnswer": false
+      }
+    ]
+  },
+  {
+    "topic": "History",
+    "question": "In Greek mythology, who is the titaness of memory?",
+    "options": [
+      {
+        "index": 0,
+        "value": "Rhea",
+        "correctAnswer": false
+      },
+      {
+        "index": 1,
+        "value": "Mnemosyne",
+        "correctAnswer": true
+      },
+      {
+        "index": 2,
+        "value": "Themis",
+        "correctAnswer": false
+      },
+      {
+        "index": 3,
+        "value": "Phoebe",
+        "correctAnswer": false
+      }
+    ]
+  },
+  {
+    "topic": "Pop culture",
+    "question": "Which Dutch Golden Age artist painted 'The Lacemaker'?",
+    "options": [
+      {
+        "index": 0,
+        "value": "Rembrandt",
+        "correctAnswer": false
+      },
+      {
+        "index": 1,
+        "value": "Johannes Vermeer",
+        "correctAnswer": true
+      },
+      {
+        "index": 2,
+        "value": "Frans Hals",
+        "correctAnswer": false
+      },
+      {
+        "index": 3,
+        "value": "Jan Steen",
+        "correctAnswer": false
+      }
+    ]
+  },
+  {
+    "topic": "History",
+    "question": "In what year was the H. J. Heinz Company established?",
+    "options": [
+      {
+        "index": 0,
+        "value": "1889",
+        "correctAnswer": false
+      },
+      {
+        "index": 1,
+        "value": "1869",
+        "correctAnswer": true
+      },
+      {
+        "index": 2,
+        "value": "1859",
+        "correctAnswer": false
+      },
+      {
+        "index": 3,
+        "value": "1901",
+        "correctAnswer": false
+      }
+    ]
+  }
+
+]
